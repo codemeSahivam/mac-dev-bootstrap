@@ -78,5 +78,8 @@ export EDITOR="${EDITOR:-nvim}"
 
 # Fastfetch on startup
 if [[ "${MDB_FASTFETCH_ON_START:-true}" == "true" && -z "${SKIP_FASTFETCH:-}" ]]; then
-  command -v fastfetch &>/dev/null && fastfetch
+  if command -v fastfetch &>/dev/null; then
+    local _ff_config="${FASTFETCH_CONFIG:-${HOME}/.config/fastfetch/config.jsonc}"
+    [[ -f "${_ff_config}" ]] && fastfetch --config "${_ff_config}"
+  fi
 fi

@@ -1,22 +1,22 @@
--- Ghostty dashboard layout: btop (left) + zsh/fastfetch (right)
--- Deployed by mac-dev-bootstrap configure_ghostty.sh
+-- Ghostty dashboard: btop (left 50%) + zsh/fastfetch (right 50%)
 
 tell application "Ghostty"
 	activate
 
 	set cfgBtop to new surface configuration
-	set command of cfgBtop to "{{BTOP}}"
+	set command of cfgBtop to "{{BTOP}} -c {{BTOP_SPLIT_CONF}}"
 
 	set cfgShell to new surface configuration
 	set command of cfgShell to "{{ZSH}} -l -i"
+	set environment variables of cfgShell to {"FASTFETCH_CONFIG={{FASTFETCH_SPLIT_CONF}}", "MDB_DASHBOARD_PANE=1"}
 
-	set dashWin to new window with configuration cfgBtop
-	set paneLeft to terminal 1 of selected tab of dashWin
-	set paneRight to split paneLeft direction right with configuration cfgShell
+	set dashWin to new window with configuration cfgShell
+	set paneRight to terminal 1 of selected tab of dashWin
+	set paneLeft to split paneRight direction left with configuration cfgBtop
 
+	perform action "equalize_splits" on paneLeft
 	focus paneRight
 
-	-- Close the temporary bootstrap window from initial-command
 	try
 		repeat with w in windows
 			if w is not dashWin then

@@ -1,5 +1,4 @@
-# Starship — minimal prompt (neofetch-style setups)
-# user@hostname ~ %
+# Starship — minimal prompt: user@host ~ %
 
 palette = "theme"
 
@@ -7,22 +6,24 @@ add_newline = false
 scan_timeout = 10
 command_timeout = 100
 
-format = "$username[@](bold fg)$hostname $directory$character"
+format = "$username$hostname $directory$character"
 
 [username]
 show_always = true
 style_user = "bold fg"
 style_root = "bold error"
+format = "[$user]($style)"
 
 [hostname]
 ssh_only = false
 style = "bold fg"
+format = "@[$hostname]($style) "
 
 [directory]
-read_only = " "
 style = "fg"
 truncate_to_repo = false
-truncation_length = 8
+truncation_length = 6
+home_symbol = "~"
 format = "[$path]($style) "
 
 [character]

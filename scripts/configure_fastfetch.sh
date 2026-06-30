@@ -7,8 +7,7 @@ source "${SCRIPT_DIR}/utils.sh"
 
 logger_init
 
-deploy_file \
-  "${ROOT_DIR}/configs/fastfetch/config.jsonc" \
-  "${HOME}/.config/fastfetch/config.jsonc"
+deploy_file "${ROOT_DIR}/configs/fastfetch/config.jsonc" "${HOME}/.config/fastfetch/config.jsonc"
+deploy_file "${ROOT_DIR}/configs/fastfetch/config-split.jsonc" "${HOME}/.config/fastfetch/config-split.jsonc"
 
 ui_success "Fastfetch configured"
