@@ -86,7 +86,7 @@ configs/zsh/
   exports.zsh
 ```
 
-Enabled: completions, history, fzf, zoxide, autosuggestions, syntax highlighting, kubectl/docker completion.
+Enabled: completions, history, fzf, zoxide (`cd` uses smart jumping; `zi`/`cdi` for interactive pick), autosuggestions, syntax highlighting, kubectl/docker completion.
 
 ### Oh My Zsh (optional)
 

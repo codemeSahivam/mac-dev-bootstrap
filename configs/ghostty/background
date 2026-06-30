@@ -1,0 +1,13 @@
+# Ghostty terminal background wallpaper
+# Image deployed to ~/.config/ghostty/backgrounds/ by configure_ghostty.sh
+
+background-image = {{BACKGROUND_IMAGE}}
+background-image-fit = cover
+background-image-position = center
+background-image-opacity = 0.42
+background-image-repeat = false
+
+# Terminal transparency — keeps text readable over the wallpaper
+background = #0a0a0a
+background-opacity = 0.90
+background-blur-radius = 10

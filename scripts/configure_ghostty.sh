@@ -9,12 +9,21 @@ logger_init
 
 THEME="${THEME:-catppuccin}"
 GHOSTTY_DASHBOARD="${GHOSTTY_DASHBOARD:-true}"
+GHOSTTY_BACKGROUND="${GHOSTTY_BACKGROUND:-true}"
 BASE="${ROOT_DIR}/configs/ghostty/config"
 THEME_SNIPPET="${ROOT_DIR}/themes/${THEME}/ghostty"
 MDB_GHOSTTY="${HOME}/.config/mac-dev-bootstrap/ghostty"
 DEST="${HOME}/.config/ghostty/config"
 
-mkdir -p "${HOME}/.config/ghostty" "${MDB_GHOSTTY}" "${HOME}/.config/mac-dev-bootstrap/bin"
+mkdir -p "${HOME}/.config/ghostty" "${HOME}/.config/ghostty/backgrounds" "${MDB_GHOSTTY}" "${HOME}/.config/mac-dev-bootstrap/bin"
+
+# Deploy wallpaper
+BG_SRC="${ROOT_DIR}/assets/backgrounds/terminal.jpg"
+BG_DEST="${HOME}/.config/ghostty/backgrounds/terminal.jpg"
+if [[ "${GHOSTTY_BACKGROUND}" == "true" && -f "${BG_SRC}" ]]; then
+  cp "${BG_SRC}" "${BG_DEST}"
+  ui_dim "Wallpaper: ${BG_DEST}"
+fi
 
 ensure_brew_path
 BTOP_BIN="$(command -v btop 2>/dev/null || echo "$(brew --prefix 2>/dev/null)/bin/btop")"
@@ -37,6 +46,12 @@ ZSH_BIN="$(command -v zsh)"
   echo "# Theme: ${THEME}"
   if [[ -f "${THEME_SNIPPET}" ]]; then
     cat "${THEME_SNIPPET}"
+  fi
+
+  if [[ "${GHOSTTY_BACKGROUND}" == "true" && -f "${BG_DEST}" ]]; then
+    echo ""
+    echo "# Terminal wallpaper"
+    sed "s|{{BACKGROUND_IMAGE}}|${BG_DEST}|g" "${ROOT_DIR}/configs/ghostty/background"
   fi
 
   if [[ "${GHOSTTY_DASHBOARD}" == "true" && "$(uname -s)" == "Darwin" ]]; then

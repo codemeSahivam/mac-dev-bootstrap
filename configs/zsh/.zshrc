@@ -57,9 +57,9 @@ if [[ -z "${DISABLE_STARSHIP:-}" ]] && command -v starship &>/dev/null; then
   eval "$(starship init zsh)"
 fi
 
-# zoxide
+# zoxide — smart cd (replaces builtin cd; tracks dirs via chpwd hook)
 if command -v zoxide &>/dev/null; then
-  eval "$(zoxide init zsh)"
+  eval "$(zoxide init zsh --cmd cd)"
 fi
 
 # fzf

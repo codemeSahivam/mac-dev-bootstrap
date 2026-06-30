@@ -34,6 +34,15 @@ alias klogs='kubectl logs -f'
 alias kexec='kubectl exec -it'
 alias kdesc='kubectl describe'
 
+# Cluster kubeconfigs (~/.kube/configs/) — pattern: k-{env}-{cluster}[-new]
+_kcfg="${HOME}/.kube/configs"
+alias k-dev-common="kubectl --kubeconfig=${_kcfg}/common_cluster_dev.yaml"
+alias k-dev-processing="kubectl --kubeconfig=${_kcfg}/processing_cluster_dev.yaml"
+alias k-sit-processing="kubectl --kubeconfig=${_kcfg}/processing_cluster_sit.yaml"
+alias k-sit-processing-new="kubectl --kubeconfig=${_kcfg}/processing_cluster_new_sit.yaml"
+alias k-sit-data="kubectl --kubeconfig=${_kcfg}/data_cluster_sit.yaml"
+unset _kcfg
+
 # ── System / modern CLI ───────────────────────────────────────────────────────
 if command -v eza &>/dev/null; then
   alias ll='eza -lah --icons'
@@ -54,6 +63,9 @@ alias ports='lsof -i -P -n | grep LISTEN'
 alias top='btop'
 alias mon='btop'
 alias cls='clear'
+
+# zoxide — cd is hooked in .zshrc; cdi = interactive directory picker
+alias zi='cdi'
 
 # Shortcuts
 alias v='nvim'

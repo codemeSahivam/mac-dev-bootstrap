@@ -1,6 +1,7 @@
 # Carbon — reference-style btop (dark + green CPU, red mem, blue net)
+# Empty main_bg + theme_background=False lets Ghostty wallpaper show through
 
-theme[main_bg]="#000000"
+theme[main_bg]=""
 theme[main_fg]="#c8c8c8"
 theme[title]="#ffffff"
 

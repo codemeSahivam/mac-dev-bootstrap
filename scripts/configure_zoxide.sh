@@ -8,7 +8,7 @@ source "${SCRIPT_DIR}/utils.sh"
 logger_init
 
 if command_exists zoxide; then
-  ui_success "zoxide ready (initialized in .zshrc)"
+  ui_success "zoxide ready (cd uses smart directory jumping)"
 else
-  ui_warn "zoxide not found"
+  ui_warn "zoxide not found — run install_packages.sh or: brew install zoxide"
 fi
