@@ -25,6 +25,7 @@ Options:
   --no-tmux           Skip tmux configuration
   --no-neovim         Skip neovim configuration
   --no-ghostty        Skip Ghostty cask
+  --no-dashboard      Disable Ghostty auto split (btop + fastfetch)
   -h, --help          Show help
 
 Examples:
@@ -41,6 +42,7 @@ FASTFETCH_ON_START="true"
 INSTALL_TMUX="true"
 INSTALL_NEOVIM="true"
 INSTALL_GHOSTTY="true"
+GHOSTTY_DASHBOARD="true"
 GIT_NAME=""
 GIT_EMAIL=""
 
@@ -53,12 +55,13 @@ while [[ $# -gt 0 ]]; do
     --no-tmux)         INSTALL_TMUX="false"; shift ;;
     --no-neovim)       INSTALL_NEOVIM="false"; shift ;;
     --no-ghostty)      INSTALL_GHOSTTY="false"; shift ;;
+    --no-dashboard)    GHOSTTY_DASHBOARD="false"; shift ;;
     -h|--help)         usage; exit 0 ;;
     *)                 die "Unknown option: $1" ;;
   esac
 done
 
-export THEME USE_OH_MY_ZSH FASTFETCH_ON_START INSTALL_TMUX INSTALL_NEOVIM INSTALL_GHOSTTY
+export THEME USE_OH_MY_ZSH FASTFETCH_ON_START INSTALL_TMUX INSTALL_NEOVIM INSTALL_GHOSTTY GHOSTTY_DASHBOARD
 
 ZSH_PLUGINS="git docker docker-compose kubectl helm terraform aws golang python history sudo command-not-found fzf zsh-autosuggestions zsh-syntax-highlighting"
 export ZSH_PLUGINS
@@ -109,7 +112,7 @@ interactive_setup() {
     GIT_EMAIL="${_ge:-${GIT_EMAIL}}"
   fi
 
-  export THEME USE_OH_MY_ZSH FASTFETCH_ON_START INSTALL_TMUX INSTALL_NEOVIM GIT_NAME GIT_EMAIL
+  export THEME USE_OH_MY_ZSH FASTFETCH_ON_START INSTALL_TMUX INSTALL_NEOVIM INSTALL_GHOSTTY GHOSTTY_DASHBOARD GIT_NAME GIT_EMAIL
 }
 
 print_summary() {
@@ -120,6 +123,7 @@ print_summary() {
   ui_dim "tmux:           ${INSTALL_TMUX}"
   ui_dim "Neovim:         ${INSTALL_NEOVIM}"
   ui_dim "Ghostty:        ${INSTALL_GHOSTTY}"
+  ui_dim "Dashboard:      ${GHOSTTY_DASHBOARD}"
   ui_dim "Architecture:   $(detect_arch)"
   ui_dim "Log file:       ${LOG_FILE}"
   echo
@@ -149,7 +153,8 @@ main() {
     "FASTFETCH_ON_START=${FASTFETCH_ON_START}" \
     "INSTALL_TMUX=${INSTALL_TMUX}" \
     "INSTALL_NEOVIM=${INSTALL_NEOVIM}" \
-    "INSTALL_GHOSTTY=${INSTALL_GHOSTTY}"
+    "INSTALL_GHOSTTY=${INSTALL_GHOSTTY}" \
+    "GHOSTTY_DASHBOARD=${GHOSTTY_DASHBOARD}"
 
   export GIT_NAME GIT_EMAIL
 
