@@ -1,0 +1,10 @@
+[palettes.theme]
+fg = "#e8e8e8"
+dir = "#89b4fa"
+branch = "#cba6f7"
+ok = "#a6e3a1"
+ok_dim = "#6c7086"
+error = "#f38ba8"
+warn = "#f9e2af"
+info = "#89b4fa"
+muted = "#cdd6f4"

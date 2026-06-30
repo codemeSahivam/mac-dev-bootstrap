@@ -1,0 +1,52 @@
+[user]
+	name = YOUR_NAME
+	email = you@example.com
+
+[core]
+	autocrlf = input
+	pager = delta
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+
+[init]
+	defaultBranch = main
+
+[credential]
+	helper = osxkeychain
+
+[pull]
+	rebase = false
+
+[push]
+	autoSetupRemote = true
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	theme = Catppuccin-Mocha
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	lg = log --oneline --graph --decorate --all
+	amend = commit --amend --no-edit
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

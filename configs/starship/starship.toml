@@ -1,0 +1,52 @@
+# Starship — minimal prompt (neofetch-style setups)
+# user@hostname ~ %
+
+palette = "theme"
+
+add_newline = false
+scan_timeout = 10
+command_timeout = 100
+
+format = "$username[@](bold fg)$hostname $directory$character"
+
+[username]
+show_always = true
+style_user = "bold fg"
+style_root = "bold error"
+
+[hostname]
+ssh_only = false
+style = "bold fg"
+
+[directory]
+read_only = " "
+style = "fg"
+truncate_to_repo = false
+truncation_length = 8
+format = "[$path]($style) "
+
+[character]
+success_symbol = "% "
+error_symbol = "% "
+vimcmd_symbol = "% "
+
+[git_branch]
+disabled = true
+[git_status]
+disabled = true
+[golang]
+disabled = true
+[java]
+disabled = true
+[python]
+disabled = true
+[docker_context]
+disabled = true
+[kubernetes]
+disabled = true
+[aws]
+disabled = true
+[cmd_duration]
+disabled = true
+[memory_usage]
+disabled = true

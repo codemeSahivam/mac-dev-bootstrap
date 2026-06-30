@@ -1,0 +1,43 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "type": "builtin",
+    "source": "Apple",
+    "padding": {
+      "top": 1,
+      "left": 2,
+      "right": 2
+    },
+    "color": {
+      "1": "green",
+      "2": "yellow",
+      "3": "red",
+      "4": "magenta",
+      "5": "blue",
+      "6": "cyan"
+    }
+  },
+  "display": {
+    "separator": ": ",
+    "color": {
+      "keys": "green",
+      "title": "white"
+    }
+  },
+  "modules": [
+    "title",
+    "separator",
+    "os",
+    "host",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "terminal",
+    "cpu",
+    "gpu",
+    "memory",
+    "break",
+    "colors"
+  ]
+}
