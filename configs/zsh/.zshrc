@@ -1,6 +1,8 @@
 # mac-dev-bootstrap — Zsh entrypoint
 # Modular files: ~/.config/mac-dev-bootstrap/zsh/
 
+# Completion paths (before compinit)
+fpath=("${HOME}/.docker/completions" ${fpath})
 autoload -Uz compinit
 compinit -C
 
@@ -24,8 +26,12 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Modular config from installer
 MDB_ZSH="${HOME}/.config/mac-dev-bootstrap/zsh"
 [[ -f "${MDB_ZSH}/exports.zsh"  ]] && source "${MDB_ZSH}/exports.zsh"
+[[ -f "${MDB_ZSH}/prompt.zsh"   ]] && source "${MDB_ZSH}/prompt.zsh"
 [[ -f "${MDB_ZSH}/aliases.zsh"  ]] && source "${MDB_ZSH}/aliases.zsh"
 [[ -f "${MDB_ZSH}/functions.zsh" ]] && source "${MDB_ZSH}/functions.zsh"
+
+# Load saved prompt preference
+[[ -f "${HOME}/.config/mac-dev-bootstrap/prompt.env" ]] && source "${HOME}/.config/mac-dev-bootstrap/prompt.env"
 
 # Oh My Zsh (optional)
 if [[ "${MDB_USE_OH_MY_ZSH:-false}" == "true" && -d "${HOME}/.oh-my-zsh" ]]; then
@@ -47,7 +53,7 @@ else
 fi
 
 # Starship prompt
-if command -v starship &>/dev/null; then
+if [[ -z "${DISABLE_STARSHIP:-}" ]] && command -v starship &>/dev/null; then
   eval "$(starship init zsh)"
 fi
 
@@ -61,25 +67,23 @@ if command -v fzf &>/dev/null; then
   source <(fzf --zsh) 2>/dev/null || true
 fi
 
+# docker completion (fpath set above)
 # kubectl completion
 if command -v kubectl &>/dev/null; then
   source <(kubectl completion zsh) 2>/dev/null || true
   compdef k kubectl 2>/dev/null || true
 fi
 
-# docker completion
-if command -v docker &>/dev/null; then
-  fpath=("${HOME}/.docker/completions" $fpath)
-  autoload -Uz compinit && compinit -C
-fi
-
 # Editor
 export EDITOR="${EDITOR:-nvim}"
 
-# Fastfetch on startup
+# Fastfetch on startup — blank line before prompt
 if [[ "${MDB_FASTFETCH_ON_START:-true}" == "true" && -z "${SKIP_FASTFETCH:-}" ]]; then
   if command -v fastfetch &>/dev/null; then
-    local _ff_config="${FASTFETCH_CONFIG:-${HOME}/.config/fastfetch/config.jsonc}"
-    [[ -f "${_ff_config}" ]] && fastfetch --config "${_ff_config}"
+    _ff_config="${FASTFETCH_CONFIG:-${HOME}/.config/fastfetch/config.jsonc}"
+    if [[ -f "${_ff_config}" ]]; then
+      fastfetch --config "${_ff_config}"
+      echo ""
+    fi
   fi
 fi

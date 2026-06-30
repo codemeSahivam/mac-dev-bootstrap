@@ -1,5 +1,5 @@
-# Default prompt — symlink to classic (see prompts/ for all styles)
-# Switch: ./scripts/switch-prompt.sh classic|macos|arrow|dev
+# Arrow — minimal arrow prompt
+# user@hostname ~/path ❯
 
 palette = "theme"
 
@@ -12,25 +12,23 @@ format = "$username$hostname$directory$character"
 [username]
 show_always = true
 style_user = "bold fg"
-style_root = "bold error"
 format = "[$user]($style)"
 
 [hostname]
 ssh_only = false
-style = "bold fg"
+style = "bold ok_dim"
 format = "@[$hostname]($style)"
 
 [directory]
-style = "fg"
-truncate_to_repo = false
-truncation_length = 8
-home_symbol = "~"
+style = "bold dir"
+truncate_to_repo = true
+truncation_length = 3
 format = " [$path]($style) "
 
 [character]
-success_symbol = "% "
-error_symbol = "% "
-vimcmd_symbol = "% "
+success_symbol = "[❯](bold ok) "
+error_symbol = "[❯](bold error) "
+vimcmd_symbol = "[❮](bold ok) "
 
 [git_branch]
 disabled = true

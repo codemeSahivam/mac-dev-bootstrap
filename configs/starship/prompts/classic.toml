@@ -1,5 +1,5 @@
-# Default prompt — symlink to classic (see prompts/ for all styles)
-# Switch: ./scripts/switch-prompt.sh classic|macos|arrow|dev
+# Classic — reference macOS prompt
+# user@hostname ~ %
 
 palette = "theme"
 

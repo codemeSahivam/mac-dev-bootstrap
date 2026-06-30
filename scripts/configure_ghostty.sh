@@ -18,8 +18,6 @@ mkdir -p "${HOME}/.config/ghostty" "${MDB_GHOSTTY}" "${HOME}/.config/mac-dev-boo
 
 ensure_brew_path
 BTOP_BIN="$(command -v btop 2>/dev/null || echo "$(brew --prefix 2>/dev/null)/bin/btop")"
-BTOP_SPLIT_CONF="${HOME}/.config/btop/btop-split.conf"
-FASTFETCH_SPLIT_CONF="${HOME}/.config/fastfetch/config-split.jsonc"
 ZSH_BIN="$(command -v zsh)"
 
 {
@@ -28,8 +26,9 @@ ZSH_BIN="$(command -v zsh)"
   # window-save-state conflicts with scripted startup layout
   if [[ "${GHOSTTY_DASHBOARD}" == "true" && "$(uname -s)" == "Darwin" ]]; then
     echo "window-save-state = never"
-    echo "window-width = 220"
-    echo "window-height = 50"
+    echo "maximize = true"
+    echo "window-width = 240"
+    echo "window-height = 55"
   else
     echo "window-save-state = always"
   fi
@@ -44,8 +43,6 @@ ZSH_BIN="$(command -v zsh)"
     if [[ -x "${BTOP_BIN}" ]]; then
       sed \
         -e "s|{{BTOP}}|${BTOP_BIN}|g" \
-        -e "s|{{BTOP_SPLIT_CONF}}|${BTOP_SPLIT_CONF}|g" \
-        -e "s|{{FASTFETCH_SPLIT_CONF}}|${FASTFETCH_SPLIT_CONF}|g" \
         -e "s|{{ZSH}}|${ZSH_BIN}|g" \
         "${ROOT_DIR}/configs/ghostty/dashboard.applescript" \
         >"${MDB_GHOSTTY}/dashboard.applescript"

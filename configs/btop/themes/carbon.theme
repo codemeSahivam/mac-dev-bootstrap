@@ -1,24 +1,20 @@
-# Carbon — true black + green accents (btop reference look)
+# Carbon — reference-style btop (dark + green CPU, red mem, blue net)
 
-# Main
 theme[main_bg]="#000000"
 theme[main_fg]="#c8c8c8"
 theme[title]="#ffffff"
 
-# Header boxes
 theme[hi_fg]="#ffffff"
 theme[selected_bg]="#1a1a1a"
 theme[selected_fg]="#00ff88"
 theme[inactive_fg]="#666666"
 
-# CPU / memory graphs
 theme[cpu_box]="#0a0a0a"
 theme[mem_box]="#0a0a0a"
 theme[net_box]="#0a0a0a"
 theme[proc_box]="#0a0a0a"
 theme[div_line]="#333333"
 
-# Graph colors (green bars like reference)
 theme[cpu_start]="#00cc66"
 theme[cpu_mid]="#00ff88"
 theme[cpu_end]="#66ffaa"
@@ -26,7 +22,6 @@ theme[free_start]="#004422"
 theme[free_mid]="#006633"
 theme[free_end]="#008844"
 
-# Memory
 theme[used_start]="#cc3333"
 theme[used_mid]="#ff4444"
 theme[used_end]="#ff6666"
@@ -34,16 +29,14 @@ theme[available_start]="#00cc66"
 theme[available_mid]="#00ff88"
 theme[available_end]="#66ffaa"
 
-# Network
 theme[download_start]="#4488ff"
 theme[download_mid]="#66aaff"
 theme[download_end]="#88ccff"
-theme[upload_start]="#aa44ff"
-theme[upload_mid]="#cc66ff"
-theme[upload_end]="#dd88ff"
+theme[upload_start]="#cc44ff"
+theme[upload_mid]="#dd66ff"
+theme[upload_end]="#ee88ff"
 
-# Processes
 theme[proc_misc]="#00ff88"
 theme[proc_cpu]="#ffaa00"
-theme[proc_mem]="#ff4444"
+theme[proc_mem]="#ff5555"
 theme[proc_gradient]="#1a1a1a"

@@ -18,7 +18,6 @@
   },
   "display": {
     "separator": ": ",
-    "compact": true,
     "color": {
       "keys": "green",
       "title": "white"

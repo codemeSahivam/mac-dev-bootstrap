@@ -14,5 +14,5 @@ deploy_file "${ROOT_DIR}/configs/btop/btop.conf" "${BTOP_DIR}/btop.conf"
 deploy_file "${ROOT_DIR}/configs/btop/btop-split.conf" "${BTOP_DIR}/btop-split.conf"
 deploy_file "${ROOT_DIR}/configs/btop/themes/carbon.theme" "${BTOP_DIR}/themes/carbon.theme"
 
-ui_success "btop configured (carbon theme + split layout)"
-ui_dim "Dashboard uses btop-split.conf in the left Ghostty pane"
+ui_success "btop configured (full dashboard layout)"
+ui_dim "Left pane: cpu, mem, net, proc"

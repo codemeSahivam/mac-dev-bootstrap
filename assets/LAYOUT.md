@@ -1,49 +1,35 @@
-# Ghostty dashboard layout (auto on startup)
+# Ghostty dashboard — reference terminal layout
 
-On macOS, Ghostty opens with a **vertical split** matching the reference riced terminal:
+On launch (macOS), Ghostty opens **maximized** with:
 
-| Left pane | Right pane |
+| Left (~52%) | Right (~48%) |
 |---|---|
-| `btop` (system monitor) | `zsh` + `fastfetch` on login |
+| **btop** — CPU, memory, network, processes | **fastfetch** — large Apple logo + system info |
+| | **zsh** prompt: `user@host ~ %` |
 
-## How it works
+Matches the classic riced macOS terminal look (btop + neofetch/fastfetch split).
 
-Ghostty does not support split layouts in config alone. mac-dev-bootstrap uses:
+## Requirements
 
-1. `initial-command` → runs a small launcher script
-2. **AppleScript** → creates a new window, splits vertically, runs `btop` left and `zsh` right
-3. Closes the temporary bootstrap window
-
-Files (deployed on install):
-
-```text
-~/.config/mac-dev-bootstrap/ghostty/dashboard.applescript
-~/.config/mac-dev-bootstrap/bin/ghostty-dashboard-init.sh
-```
+- macOS with Ghostty 1.3+ (AppleScript API)
+- Automation permission for Ghostty
+- **Maximized window** — needed so both panes have enough width for full btop + Apple logo
 
 ## First launch
 
-macOS will ask for **Automation** permission (Ghostty controlling Ghostty). Allow it in:
-
+Allow **Automation** when prompted:
 **System Settings → Privacy & Security → Automation**
 
-## Disable auto dashboard
+## Manual shortcuts
+
+```text
+Cmd+D          split vertical
+Cmd+Shift+D    split horizontal
+Cmd+Ctrl+arrows  focus pane
+```
+
+## Disable
 
 ```bash
 ./install.sh --no-dashboard
-```
-
-Or remove this line from `~/.config/ghostty/config`:
-
-```ini
-initial-command = ...
-```
-
-## Manual layout (same as Cmd+D)
-
-```text
-Cmd+D          split right (vertical)
-Cmd+Shift+D    split down (horizontal)
-Cmd+Ctrl+←→↑↓  focus panes
-Cmd+W          close pane
 ```

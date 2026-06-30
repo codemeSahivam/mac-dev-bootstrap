@@ -1,0 +1,73 @@
+# Starship — full dev prompt (optional)
+# Enable: export STARSHIP_CONFIG=~/.config/starship.dev.toml
+
+palette = "theme"
+
+add_newline = true
+scan_timeout = 30
+command_timeout = 500
+
+format = """
+$directory$git_branch$git_status
+$golang$java$python$docker_context$kubernetes$aws$memory_usage
+$cmd_duration$character"""
+
+[directory]
+style = "bold dir"
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style) "
+
+[git_branch]
+symbol = "󰘬 "
+style = "bold branch"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style = "bold error"
+format = "[$all_status$ahead_behind]($style) "
+
+[golang]
+symbol = "󰟓 "
+style = "bold info"
+format = "[$symbol($version )]($style)"
+
+[java]
+symbol = "󰬷 "
+style = "bold error"
+format = "[$symbol($version )]($style)"
+
+[python]
+symbol = "󰌠 "
+style = "bold warn"
+format = "[$symbol($version )]($style)"
+
+[docker_context]
+symbol = "🐳 "
+style = "bold info"
+format = "[$symbol$context]($style) "
+
+[kubernetes]
+symbol = "☸ "
+style = "bold ok"
+format = "on [$symbol$context( \\($namespace\\))]($style) "
+disabled = false
+
+[aws]
+symbol = "󰸏 "
+style = "bold warn"
+format = "on [$symbol$profile]($style) "
+disabled = false
+
+[memory_usage]
+disabled = true
+
+[cmd_duration]
+min_time = 500
+style = "bold ok_dim"
+format = "took [$duration]($style) "
+
+[character]
+success_symbol = "[❯](bold ok)"
+error_symbol = "[❯](bold error)"
+vimcmd_symbol = "[❮](bold ok)"

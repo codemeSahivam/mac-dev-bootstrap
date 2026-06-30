@@ -1,5 +1,5 @@
-# Default prompt — symlink to classic (see prompts/ for all styles)
-# Switch: ./scripts/switch-prompt.sh classic|macos|arrow|dev
+# macOS — colored classic prompt
+# user@hostname ~ %
 
 palette = "theme"
 
@@ -11,17 +11,17 @@ format = "$username$hostname$directory$character"
 
 [username]
 show_always = true
-style_user = "bold fg"
+style_user = "bold ok"
 style_root = "bold error"
 format = "[$user]($style)"
 
 [hostname]
 ssh_only = false
-style = "bold fg"
+style = "bold info"
 format = "@[$hostname]($style)"
 
 [directory]
-style = "fg"
+style = "bold dir"
 truncate_to_repo = false
 truncation_length = 8
 home_symbol = "~"

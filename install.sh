@@ -26,6 +26,7 @@ Options:
   --no-neovim         Skip neovim configuration
   --no-ghostty        Skip Ghostty cask
   --no-dashboard      Disable Ghostty auto split (btop + fastfetch)
+  --prompt-style NAME classic | macos | arrow | dev
   -h, --help          Show help
 
 Examples:
@@ -43,6 +44,7 @@ INSTALL_TMUX="true"
 INSTALL_NEOVIM="true"
 INSTALL_GHOSTTY="true"
 GHOSTTY_DASHBOARD="true"
+PROMPT_STYLE="classic"
 GIT_NAME=""
 GIT_EMAIL=""
 
@@ -56,12 +58,13 @@ while [[ $# -gt 0 ]]; do
     --no-neovim)       INSTALL_NEOVIM="false"; shift ;;
     --no-ghostty)      INSTALL_GHOSTTY="false"; shift ;;
     --no-dashboard)    GHOSTTY_DASHBOARD="false"; shift ;;
+    --prompt-style)    PROMPT_STYLE="$2"; shift 2 ;;
     -h|--help)         usage; exit 0 ;;
     *)                 die "Unknown option: $1" ;;
   esac
 done
 
-export THEME USE_OH_MY_ZSH FASTFETCH_ON_START INSTALL_TMUX INSTALL_NEOVIM INSTALL_GHOSTTY GHOSTTY_DASHBOARD
+export THEME USE_OH_MY_ZSH FASTFETCH_ON_START INSTALL_TMUX INSTALL_NEOVIM INSTALL_GHOSTTY GHOSTTY_DASHBOARD PROMPT_STYLE
 
 ZSH_PLUGINS="git docker docker-compose kubectl helm terraform aws golang python history sudo command-not-found fzf zsh-autosuggestions zsh-syntax-highlighting"
 export ZSH_PLUGINS
@@ -112,7 +115,15 @@ interactive_setup() {
     GIT_EMAIL="${_ge:-${GIT_EMAIL}}"
   fi
 
-  export THEME USE_OH_MY_ZSH FASTFETCH_ON_START INSTALL_TMUX INSTALL_NEOVIM INSTALL_GHOSTTY GHOSTTY_DASHBOARD GIT_NAME GIT_EMAIL
+  prompt_choice "Prompt style:" "Classic (user@host ~ %)" "macOS (colored)" "Arrow (❯)" "Dev (git/k8s/docker)"
+  case "${REPLY}" in
+    "Classic (user@host ~ %)") PROMPT_STYLE="classic" ;;
+    "macOS (colored)")         PROMPT_STYLE="macos" ;;
+    "Arrow (❯)")               PROMPT_STYLE="arrow" ;;
+    "Dev (git/k8s/docker)")    PROMPT_STYLE="dev" ;;
+  esac
+
+  export THEME USE_OH_MY_ZSH FASTFETCH_ON_START INSTALL_TMUX INSTALL_NEOVIM INSTALL_GHOSTTY GHOSTTY_DASHBOARD PROMPT_STYLE GIT_NAME GIT_EMAIL
 }
 
 print_summary() {
@@ -124,6 +135,7 @@ print_summary() {
   ui_dim "Neovim:         ${INSTALL_NEOVIM}"
   ui_dim "Ghostty:        ${INSTALL_GHOSTTY}"
   ui_dim "Dashboard:      ${GHOSTTY_DASHBOARD}"
+  ui_dim "Prompt:         ${PROMPT_STYLE}"
   ui_dim "Architecture:   $(detect_arch)"
   ui_dim "Log file:       ${LOG_FILE}"
   echo
@@ -154,7 +166,8 @@ main() {
     "INSTALL_TMUX=${INSTALL_TMUX}" \
     "INSTALL_NEOVIM=${INSTALL_NEOVIM}" \
     "INSTALL_GHOSTTY=${INSTALL_GHOSTTY}" \
-    "GHOSTTY_DASHBOARD=${GHOSTTY_DASHBOARD}"
+    "GHOSTTY_DASHBOARD=${GHOSTTY_DASHBOARD}" \
+    "PROMPT_STYLE=${PROMPT_STYLE}"
 
   export GIT_NAME GIT_EMAIL
 

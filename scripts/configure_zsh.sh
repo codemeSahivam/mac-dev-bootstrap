@@ -12,7 +12,7 @@ MODULAR="${HOME}/.config/mac-dev-bootstrap/zsh"
 mkdir -p "${MODULAR}"
 
 # Deploy modular zsh files
-for f in aliases.zsh functions.zsh exports.zsh; do
+for f in aliases.zsh functions.zsh exports.zsh prompt.zsh; do
   deploy_file "${ZSH_DIR}/${f}" "${MODULAR}/${f}"
 done
 
